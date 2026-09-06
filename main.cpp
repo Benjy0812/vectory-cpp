@@ -1,27 +1,33 @@
-#include<iostream>
-#include<string>
-#include<vector>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::vector;
 using std::string;
+using std::numeric_limits;
+using std::streamsize;
 
 static int show_list(const vector<string>& list) {
-    cout << "\nList";
-    for (const string& item : list)
-        cout << item << endl;
+    if (list.empty()) {
+        cout << "List is empty" << endl;
+    }
+    else {
+        for (const string& item : list)
+            cout << item << endl;
+    }
     return 0;
 }
 
-void add_list(vector<string>& list) {
-
+static void add_list(vector<string>& list) {
     cout << "\nAdd to list";
-    string itemName;
-    cin >> itemName;
+    string item_Name;
+    cin >> item_Name;
 
-    list.push_back(itemName);
+    list.push_back(item_Name);
 }
 
 static int remove_list() {
@@ -41,20 +47,29 @@ static int exit_cli() {
 
 int main() {
     vector<string> list;
-    bool state = false;
+    bool is_running = true;
 
-    while (state == false) {
+    while (is_running) {
         cout << "Welcome!";
         cout << "\n1. Show list";
         cout << "\n2. Add to list";
         cout << "\n3. Remove from list";
         cout << "\n4. purge list";
         cout << "\n5. Exit";
+        cout << "\nEnter here:";
         cout << endl;
-        cout << "\nEnter your choice: ";
 
         int choice;
         cin >> choice;
+
+        if (cin.good()) {
+            
+        }
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input, please enter a valid number." << endl;
+        }
 
         switch (choice) {
             case 1: show_list(list);
@@ -66,9 +81,10 @@ int main() {
             case 4: purge_list();
                 break;
             case 5: exit_cli();
-                state = true;
+                is_running = false;
                 break;
-            default: cout << "\nInvalid choice!";
+            default: cout << "\nInvalid choice!\n";
+                break;
         }
     }
     return 0;
