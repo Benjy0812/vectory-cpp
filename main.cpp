@@ -10,12 +10,13 @@ using std::vector;
 using std::string;
 using std::numeric_limits;
 using std::streamsize;
+using std::getline;
 
 static int show_list(const vector<string>& list) {
     if (list.empty()) {
         cout << "List is empty" << endl;
     }
-    else {
+    if (!list.empty()) {
         for (const string& item : list)
             cout << item << endl;
     }
@@ -24,10 +25,10 @@ static int show_list(const vector<string>& list) {
 
 static void add_list(vector<string>& list) {
     cout << "\nAdd to list";
-    string item_Name;
-    cin >> item_Name;
+    string item_name;
+    getline(cin, item_name);
 
-    list.push_back(item_Name);
+    list.push_back(item_name);
 }
 
 static int remove_list() {
@@ -63,7 +64,7 @@ int main() {
         cin >> choice;
 
         if (cin.good()) {
-            
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         if (cin.fail()) {
             cin.clear();
