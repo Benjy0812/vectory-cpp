@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <cctype>
 
 using std::cout;
 using std::cin;
@@ -36,9 +37,31 @@ static int remove_list() {
     return 0;
 }
 
-static int purge_list() {
-    cout << "\nPurge list";
-    return 0;
+static void purge_list(vector<string>& list) {
+    cout << "\nPurge list\n";
+    cout << "Are you sure you want to purge the list";
+    string confirmation;
+    cin >> confirmation;
+    if (!confirmation.empty()) {
+        for (char &c: confirmation) {
+            c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+        }
+    }
+    if (confirmation == "yes" || confirmation == "y") {
+        if (!list.empty()) {
+            list.clear();
+            list.shrink_to_fit();
+        }
+        else {
+            cout << "Can't purge a empty list!";
+        }
+    }
+    else if (confirmation == "no" || confirmation == "n") {
+        cout << "Purge canceled";
+    }
+    else {
+        cout << "Invalid choice";
+    }
 }
 
 static int exit_cli() {
