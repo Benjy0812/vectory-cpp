@@ -13,23 +13,29 @@ using std::numeric_limits;
 using std::streamsize;
 using std::getline;
 
-static int show_list(const vector<string>& list) {
+static void show_list(const vector<string>& list) {
     if (list.empty()) {
         cout << "List is empty" << endl;
     }
-    if (!list.empty()) {
+    else {
+        cout << "List:" << "\n" << endl;
         for (const string& item : list)
-            cout << item << endl;
+            cout << item << "\n" << endl;
+        cout << "Press enter to continue";
+        cin.get();
     }
-    return 0;
 }
 
 static void add_list(vector<string>& list) {
-    cout << "\nAdd to list";
+    cout << "\nAdd to list: ";
     string item_name;
     getline(cin, item_name);
-
-    list.push_back(item_name);
+    if (item_name.empty()) {
+        cout << "Can't enter nothing\n";
+    }
+    else {
+        list.push_back(item_name);
+    }
 }
 
 //TODO make sure it only takes numbers
@@ -71,17 +77,12 @@ static void purge_list(vector<string>& list) {
     }
 }
 
-static int exit_cli() {
-    cout << "\nExit";
-    return 0;
-}
-
 int main() {
     vector<string> list;
     bool is_running = true;
 
+    cout << "Welcome!";
     while (is_running) {
-        cout << "Welcome!";
         cout << "\n1. Show list";
         cout << "\n2. Add to list";
         cout << "\n3. Remove from list";
@@ -93,13 +94,13 @@ int main() {
         int choice;
         cin >> choice;
 
-        if (cin.good()) {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input, please enter a valid number." << endl;
+        }
+        else {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
         switch (choice) {
@@ -107,11 +108,11 @@ int main() {
                 break;
             case 2: add_list(list);
                 break;
-            case 3: remove_list();
+            case 3: remove_list(list);
                 break;
-            case 4: purge_list();
+            case 4: purge_list(list);
                 break;
-            case 5: exit_cli();
+            case 5:
                 is_running = false;
                 break;
             default: cout << "\nInvalid choice!\n";
