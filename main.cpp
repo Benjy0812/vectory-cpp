@@ -32,9 +32,16 @@ static void add_list(vector<string>& list) {
     list.push_back(item_name);
 }
 
-static int remove_list() {
+//TODO make sure it only takes numbers
+static void remove_list(vector<string>& list) {
     cout << "\nRemove from list";
-    return 0;
+    int position = 0;
+    for (const string& item : list)
+        cout << item << "\n" << endl;
+    cin >> position;
+    position -= 1;
+
+    list.erase(list.begin() + position);
 }
 
 static void purge_list(vector<string>& list) {
