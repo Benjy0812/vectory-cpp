@@ -27,7 +27,7 @@ static void show_list(const vector<string>& list) {
 }
 
 static void add_list(vector<string>& list) {
-    cout << "\nAdd to list: ";
+    cout << "Add to list: ";
     string item_name;
     getline(cin, item_name);
     if (item_name.empty()) {
