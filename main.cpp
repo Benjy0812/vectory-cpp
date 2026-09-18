@@ -40,17 +40,17 @@ static void add_list(vector<string>& list) {
 }
 
 static void remove_list(vector<string>& list) {
-    cout << "\nRemove from list";
+    cout << "\nRemove from list\n";
     int position = 0;
     for (const string& item : list)
-        cout << item << "\n" << endl;
+        cout << item << "\n";
     cin >> position;
 
     if (cin.fail()) {
         cerr << "Invalid input please enter a number!\n";
     }
     else if (position < 1 || position > list.size()) {
-        cerr << "Please enter a number between 1 and 999";
+        cerr << "Please enter a number between 1 and 999\n";
     }
     else {
         --position;
