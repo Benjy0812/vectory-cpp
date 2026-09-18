@@ -12,6 +12,7 @@ using std::string;
 using std::numeric_limits;
 using std::streamsize;
 using std::getline;
+using std::cerr;
 
 static void show_list(const vector<string>& list) {
     if (list.empty()) {
@@ -31,23 +32,30 @@ static void add_list(vector<string>& list) {
     string item_name;
     getline(cin, item_name);
     if (item_name.empty()) {
-        cout << "Can't enter nothing\n";
+        cerr << "Can't enter nothing\n";
     }
     else {
         list.push_back(item_name);
     }
 }
 
-//TODO make sure it only takes numbers
 static void remove_list(vector<string>& list) {
     cout << "\nRemove from list";
     int position = 0;
     for (const string& item : list)
         cout << item << "\n" << endl;
     cin >> position;
-    position -= 1;
 
-    list.erase(list.begin() + position);
+    if (cin.fail()) {
+        cerr << "Invalid input please enter a number!\n";
+    }
+    else if (position < 1 || position > list.size()) {
+        cerr << "Please enter a number between 1 and 999";
+    }
+    else {
+        --position;
+        list.erase(list.begin() + position);
+    }
 }
 
 static void purge_list(vector<string>& list) {
@@ -66,7 +74,7 @@ static void purge_list(vector<string>& list) {
             list.shrink_to_fit();
         }
         else {
-            cout << "Can't purge a empty list!";
+            cerr << "Can't purge a empty list!";
         }
     }
     else if (confirmation == "no" || confirmation == "n") {
@@ -97,7 +105,7 @@ int main() {
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input, please enter a valid number." << endl;
+            cerr << "Invalid input, please enter a valid number.";
         }
         else {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -115,7 +123,7 @@ int main() {
             case 5:
                 is_running = false;
                 break;
-            default: cout << "\nInvalid choice!\n";
+            default: cerr << "\nInvalid choice!\n";
                 break;
         }
     }
