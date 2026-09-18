@@ -13,6 +13,5 @@ Welcome!
 Enter here:
 2
 
-
 Add to list:
 ```
