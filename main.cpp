@@ -59,29 +59,28 @@ static void remove_list(vector<string>& list) {
 }
 
 static void purge_list(vector<string>& list) {
-    cout << "\nPurge list\n";
-    cout << "Are you sure you want to purge the list";
+    cout << "\nPurge list:\n";
     string confirmation;
-    cin >> confirmation;
+    if (!list.empty()) {
+        cout << "Are you sure you want to purge the list (y/n): ";
+        cin >> confirmation;
+    }
     if (!confirmation.empty()) {
         for (char &c: confirmation) {
             c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
         }
     }
-    if (confirmation == "yes" || confirmation == "y") {
+    if (confirmation == "y") {
         if (!list.empty()) {
             list.clear();
             list.shrink_to_fit();
         }
-        else {
-            cerr << "Can't purge a empty list!";
-        }
     }
-    else if (confirmation == "no" || confirmation == "n") {
+    else if (confirmation == "n") {
         cout << "Purge canceled";
     }
     else {
-        cout << "Invalid choice";
+        cout << "List empty!\n";
     }
 }
 
