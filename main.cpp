@@ -19,7 +19,7 @@ static void show_list(const vector<string>& list) {
     }
     else {
         cout << "List:" << "\n";
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < static_cast<int>(list.size()); i++) {
             cout << i + 1 << ". " << list[i] << "\n";
         }
         cout << "Press enter to continue";
@@ -43,7 +43,7 @@ static void add_list(vector<string>& list) {
 
 static void remove_list(vector<string>& list) {
     cout << "\nRemove from list\n";
-    for (int i = 0; i < list.size(); i++) {
+    for (int i = 0; i < static_cast<int>(list.size()); i++) {
         cout << i + 1 << ". " << list[i] << "\n";
     }
 
@@ -55,7 +55,7 @@ static void remove_list(vector<string>& list) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cerr << "Invalid input please enter a number!\n";
     }
-    else if (position < 1 || position > list.size()) {
+    else if (position < 1 || position > static_cast<int>(list.size())) {
         cerr << "Please enter a number between 1 and " << list.size() << "\n";
     }
     else {
@@ -73,13 +73,17 @@ static void purge_list(vector<string>& list) {
         }
 
         cout << "\nPurge list:\n";
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < static_cast<int>(list.size()); i++) {
             cout << i + 1 << ". " << list[i] << "\n";
         }
 
         cout << "Are you sure you want to purge the list (y/n): ";
         string confirmation;
-        cin >> confirmation;
+        if (!(cin >> confirmation)) {
+            cout << "\ninput error or EOF purge canceled\n";
+            break;
+
+        }
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         // Convert to lower case
@@ -114,7 +118,10 @@ int main() {
         cout << "\nEnter here:";
 
         int choice;
-        cin >> choice;
+        if (!(cin >> choice)) {
+            cout << "\ninput error or EOF purge canceled\n";
+            break;
+        }
 
         if (cin.fail()) {
             cin.clear();
