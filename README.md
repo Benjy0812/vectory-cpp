@@ -51,12 +51,12 @@ Enter here:
 Enter the number corresponding to the action you want to perform, and follow the prompts.
 
 | Option | Action                                              |
-|:-------|:----------------------------------------------------|
-| 1      | Show all items in the list                          |
-| 2      | Add a new item to the list                          |
-| 3      | Remove an item by its number                        |
-| 4      | Purge (clear) the entire list, with y/n confirmation|
-| 5      | Exit the program                                    |
+|:------:|:----------------------------------------------------|
+|   1    | Show all items in the list                          |
+|   2    | Add a new item to the list                          |
+|   3    | Remove an item by its number                        |
+|   4    | Purge (clear) the entire list, with y/n confirmation|
+|   5    | Exit the program                                    |
 
 ## Notes
 
