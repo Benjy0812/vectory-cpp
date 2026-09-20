@@ -12,6 +12,7 @@ using std::string;
 using std::vector;
 using std::numeric_limits;
 using std::streamsize;
+using std::isspace;
 
 static void show_list(const vector<string>& list) {
     if (list.empty()) {
@@ -82,9 +83,12 @@ static void purge_list(vector<string>& list) {
         if (!getline(cin, confirmation)) {
             cout << "\ninput error or EOF purge canceled\n";
             break;
-
         }
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        // Remove white space
+        while (!confirmation.empty() && isspace(static_cast<unsigned char>(confirmation.back()))) {
+            confirmation.pop_back();
+        }
 
         // Convert to lower case
         for (char &c: confirmation) {
