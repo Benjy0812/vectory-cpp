@@ -79,7 +79,7 @@ static void purge_list(vector<string>& list) {
 
         cout << "Are you sure you want to purge the list (y/n): ";
         string confirmation;
-        if (!(cin >> confirmation)) {
+        if (!getline(cin, confirmation)) {
             cout << "\ninput error or EOF purge canceled\n";
             break;
 
