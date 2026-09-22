@@ -1,4 +1,4 @@
-# Vectory-cpp
+# vectory-cpp
 
 A simple command-line list manager written in C++. Add, view, remove, and purge items from an in-memory list using `std::vector<std::string>`.
 
@@ -12,7 +12,7 @@ A simple command-line list manager written in C++. Add, view, remove, and purge 
 ## Requirements
 
 - A C++ compiler that supports C++14 or later (e.g. `g++`, `clang++`)
-- CMake 3.4.3 or later
+- CMake 3.16 or later (matches `cmake_minimum_required(VERSION 3.16)` in `CMakeLists.txt`)
 
 ## Clone
 
@@ -30,21 +30,32 @@ cmake ..
 cmake --build .
 ```
 
+Or open the project folder in CLion (it uses its bundled CMake + MinGW toolchain) and press `Ctrl+F9` / `Build Project`. If you previously had a configure error, do `Tools > CMake > Reload CMake Project` (delete `cmake-build-debug/` if cached).
+
 ## Run
 
 ```bash
 ./vectory-cpp
 ```
 
+On Windows:
+
+```powershell
+.\build\vectory-cpp.exe
+# or, for a CLion Debug build:
+.\cmake-build-debug\vectory-cpp.exe
+```
+
 ## Usage
 
 On launch, you'll see a menu:
 ```text
-Show list
-Add to list
-Remove from list
-purge list
-Exit
+Welcome!
+1. Show list
+2. Add to list
+3. Remove from list
+4. Purge list
+5. Exit
 Enter here:
 ```
 

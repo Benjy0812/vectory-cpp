@@ -23,7 +23,7 @@ static void show_list(const vector<string>& list) {
         for (int i = 0; i < static_cast<int>(list.size()); i++) {
             cout << i + 1 << ". " << list[i] << "\n";
         }
-        cout << "Press enter to continue";
+        cout << "Press Enter to continue";
         cin.get();
     }
 }
@@ -35,7 +35,7 @@ static void add_list(vector<string>& list) {
     getline(cin, item_name);
 
     if (item_name.empty()) {
-        cerr << "Can't enter nothing\n";
+        cerr << "Cannot add an empty item\n";
     }
     else {
         list.push_back(item_name);
@@ -43,18 +43,21 @@ static void add_list(vector<string>& list) {
 }
 
 static void remove_list(vector<string>& list) {
+    if (list.empty()) {
+        cout << "List empty!\n";
+    }
     cout << "\nRemove from list\n";
     for (int i = 0; i < static_cast<int>(list.size()); i++) {
         cout << i + 1 << ". " << list[i] << "\n";
     }
 
-    int position = 0;
+    int position;
     cin >> position;
 
     if (cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cerr << "Invalid input please enter a number!\n";
+        cerr << "Invalid input, please enter a number!\n";
     }
     else if (position < 1 || position > static_cast<int>(list.size())) {
         cerr << "Please enter a number between 1 and " << list.size() << "\n";
@@ -81,16 +84,16 @@ static void purge_list(vector<string>& list) {
         cout << "Are you sure you want to purge the list (y/n): ";
         string confirmation;
         if (!getline(cin, confirmation)) {
-            cout << "\ninput error or EOF purge canceled\n";
+            cout << "\nInput error or EOF, purge canceled\n";
             break;
         }
 
-        // Remove white space
+        // Remove trailing whitespace
         while (!confirmation.empty() && isspace(static_cast<unsigned char>(confirmation.back()))) {
             confirmation.pop_back();
         }
 
-        // Convert to lower case
+        // Convert to lowercase
         for (char &c: confirmation) {
             c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
         }
@@ -102,7 +105,7 @@ static void purge_list(vector<string>& list) {
             break;
         }
         if (confirmation == "n") {
-            cout << "Purge canceled";
+            cout << "Purge canceled\n";
             break;
         }
     }
@@ -117,20 +120,20 @@ int main() {
         cout << "\n1. Show list";
         cout << "\n2. Add to list";
         cout << "\n3. Remove from list";
-        cout << "\n4. purge list";
+        cout << "\n4. Purge list";
         cout << "\n5. Exit";
         cout << "\nEnter here:";
 
         int choice;
         if (!(cin >> choice)) {
-            cout << "\ninput error or EOF purge canceled\n";
+            cout << "\nInput error or EOF, exiting\n";
             break;
         }
 
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cerr << "Invalid input please enter a valid number.";
+            cerr << "Invalid input, please enter a valid number.";
         }
         else {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
