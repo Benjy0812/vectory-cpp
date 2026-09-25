@@ -115,9 +115,9 @@ int main() {
     vector<string> list;
     bool is_running = true;
 
-    cout << "Welcome!";
+    cout << "Welcome!\n";
     while (is_running) {
-        cout << "\n1. Show list";
+        cout << "1. Show list";
         cout << "\n2. Add to list";
         cout << "\n3. Remove from list";
         cout << "\n4. Purge list";
