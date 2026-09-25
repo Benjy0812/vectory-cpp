@@ -77,7 +77,3 @@ Enter the number corresponding to the action you want to perform, and follow the
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-**Note**: This README was generated with the assistance of AI.
